@@ -48,7 +48,7 @@ const LandingPage: React.FC = () => {
   const [consultaEmail, setConsultaEmail] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [planPago, setPlanPago] = useState<string>("");
-  const [setAlert] = useState<{
+  const [alert, setAlert] = useState<{
     type: "success" | "error";
     message: string;
   } | null>(null);

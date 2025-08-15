@@ -411,7 +411,7 @@ const LandingPage: React.FC = () => {
           <Grid item xs={12} md={6}>
             <Box
               component="img"
-              src="/public/programador.JPG"
+              src="/programador.JPG"
               alt="Programador trabajando"
               sx={{
                 maxWidth: "100%",

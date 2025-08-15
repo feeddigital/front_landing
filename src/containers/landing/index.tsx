@@ -5,7 +5,6 @@ import {
   Typography,
   Card,
   CardContent,
-  List,
   ListItem,
   ListItemIcon,
   ListItemText,
@@ -25,14 +24,11 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import {
-  Language,
   Code,
   Psychology,
   Computer,
-  Storage,
   CalendarToday,
   Schedule,
-  CheckCircle,
   Person,
   Email,
   Phone,
@@ -52,7 +48,7 @@ const LandingPage: React.FC = () => {
   const [consultaEmail, setConsultaEmail] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [planPago, setPlanPago] = useState<string>("");
-  const [alert, setAlert] = useState<{
+  const [setAlert] = useState<{
     type: "success" | "error";
     message: string;
   } | null>(null);
@@ -90,7 +86,7 @@ const LandingPage: React.FC = () => {
         planPago: planPago,
       };
 
-      const response = await apiService.sendSubscription(subscriptionData);
+      await apiService.sendSubscription(subscriptionData);
 
       showAlert(
         "success",

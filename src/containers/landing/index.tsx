@@ -22,6 +22,8 @@ import {
   AccordionSummary,
   Accordion,
   AccordionDetails,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import {
   Code,
@@ -41,6 +43,8 @@ import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstruct
 import { apiService } from "../../services/api-service";
 
 const LandingPage: React.FC = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [inscripcionEmail, setInscripcionEmail] = useState<string>("");
   const [inscripcionNombre, setInscripcionNombre] = useState<string>("");
   const [inscripcionApellido, setInscripcionApellido] = useState<string>("");
@@ -296,18 +300,45 @@ const LandingPage: React.FC = () => {
                 backgroundColor: "rgba(0, 0, 0, 0.66)", // Mejora el contraste del texto
               }}
             >
-              <Avatar
-                src="/LOGO_CUADRADO.jpg"
-                alt="Logo Feed Digital"
-                sx={{
-                  width: 120,
-                  height: 120,
-                  mb: 1,
-                  mt: 8,
-                }}
-              >
-                FD
-              </Avatar>
+              {!isMobile ? (
+                <Avatar
+                  src="/LOGO_CUADRADO.jpg"
+                  alt="Logo Feed Digital"
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    mb: 1,
+                    mt: 8,
+                  }}
+                >
+                  FD
+                </Avatar>
+              ) : (
+                <Box
+                  sx={{
+                    background:
+                      "linear-gradient(to bottom, rgba(0,0,0,0.9) 90%, transparent 100%)",
+                    borderRadius: "8px",
+                    display: "inline-flex",
+                    justifyContent: "left",
+                    alignItems: "left",
+                    width: "100%",
+                  }}
+                >
+                  <Avatar
+                    src="/LOGO_CUADRADO.jpg"
+                    alt="Logo Feed Digital"
+                    sx={{
+                      width: 120,
+                      height: 100,
+                      mb: 1,
+                      mt: 5,
+                    }}
+                  >
+                    FD
+                  </Avatar>
+                </Box>
+              )}
 
               <Typography variant="h1" component="h1" gutterBottom>
                 Aprendé Desarrollo Web Fullstack
@@ -398,12 +429,12 @@ const LandingPage: React.FC = () => {
               El desarrollo de software es un universo en constante crecimiento
               y lleno de oportunidades. El perfil de Programador Web Fullstack
               está entre los más buscados por las empresas, y será nuestra meta
-              clara. A lo largo de la cursada, practicaremos de forma intensiva para
-              que desarrolles un entendimiento sólido de la programación y la
-              lógica computacional. Al especializarte en este perfil, contarás
-              con las bases necesarias para comprender el funcionamiento de las
-              empresas tecnológicas y enfrentar tus primeras entrevistas con
-              confianza.
+              clara. A lo largo de la cursada, practicaremos de forma intensiva
+              para que desarrolles un entendimiento sólido de la programación y
+              la lógica computacional. Al especializarte en este perfil,
+              contarás con las bases necesarias para comprender el
+              funcionamiento de las empresas tecnológicas y enfrentar tus
+              primeras entrevistas con confianza.
             </Typography>
           </Grid>
 

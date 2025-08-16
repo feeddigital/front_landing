@@ -11,9 +11,6 @@ import {
   Paper,
   TextField,
   Button,
-  Select,
-  MenuItem,
-  InputLabel,
   Avatar,
   Chip,
   Divider,
@@ -34,7 +31,6 @@ import {
   Person,
   Email,
   Phone,
-  Payment,
 } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DataObjectIcon from "@mui/icons-material/DataObject";
@@ -63,7 +59,7 @@ const LandingPage: React.FC = () => {
   const linksMercadoPago: Record<string, string> = {
     transferencia1: "https://mpago.li/link-transferencia-1pago",
     transferencia6: "https://mpago.li/link-transferencia-6pagos",
-    tarjeta: "https://mpago.li/link-tarjeta-cuotas",
+    tarjeta: "https://mpago.li/2avsyVs",
   };
 
   const showAlert = (type: "success" | "error", message: string) => {
@@ -343,7 +339,7 @@ const LandingPage: React.FC = () => {
               <Typography variant="h1" component="h1" gutterBottom>
                 Aprendé Desarrollo Web Fullstack
               </Typography>
-              <Typography variant="h5" sx={{ mb: 2 }}>
+              <Typography variant="subtitle1" sx={{ mb: 2 }}>
                 Cuando finalices este curso vas a poder ofrecer servicios de
                 desarrollo web fullstack y crear web/apps profesionales.
               </Typography>
@@ -522,32 +518,102 @@ const LandingPage: React.FC = () => {
           </Card>
         </Grid>
       </Grid>
-      <Grid item sm={12} md={12} lg={12}>
+      <Grid item sm={6} md={8} lg={8}>
         <Paper sx={{ p: 4, textAlign: "center", backgroundColor: "#0a0a0a" }}>
           <Box sx={{ mb: 4 }}>
-            <InputLabel id="plan-pago-label">Plan de pago</InputLabel>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", sm: "row" },
-                gap: 2,
-                mb: 2,
-                maxWidth: 600,
-                mx: "auto",
-              }}
-            >
-              <Select
-                fullWidth
-                value={planPago}
-                onChange={(e) => setPlanPago(e.target.value)}
-              >
-                <MenuItem value="transferencia1">Transferencia 1 pago</MenuItem>
-                <MenuItem value="transferencia6">
-                  Transferencia 6 pagos
-                </MenuItem>
-                <MenuItem value="tarjeta">Tarjeta de crédito</MenuItem>
-              </Select>
+                      {/* Botones de plan de pago */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              gap: 2,
+              mb: 2,
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            {[
+              {
+                value: "transferencia1",
+                label: "Transferencia 1 pago",
+                desc: "Pago único con transferencia bancaria.",
+                hasDiscount: true,
+              },
+              {
+                value: "transferencia6",
+                label: "Transferencia 6 pagos",
+                desc: "6 cuotas fijas sin interés por transferencia.",
+                hasDiscount: false,
+              },
+              {
+                value: "tarjeta",
+                label: "Tarjeta de crédito",
+                desc: "Pagá con tu tarjeta en cuotas.",
+                hasDiscount: false,
+              },
+            ].map((plan) => (
+              <Box
+                key={plan.value}
+                sx={{ position: "relative", display: "inline-block" }}
+              >    
+                <Button
+                  variant={planPago === plan.value ? "contained" : "outlined"}
+                  color={planPago === plan.value ? "primary" : "inherit"}
+                  onClick={() => setPlanPago(plan.value)}
+                  sx={{
+                    minWidth: 200,
+                    borderRadius: "8px",
+                    fontWeight: "bold",
+                    backgroundColor:
+                      planPago === plan.value ? "primary.main" : "transparent",
+                    color: planPago === plan.value ? "#fff" : "#ccc",
+                    "&:hover": {
+                      backgroundColor:
+                        planPago === plan.value ? "primary.dark" : "#1f1f1f",
+                    },
+                  }}
+                >
+                  {plan.label}
+                </Button>
+              </Box>
+            ))}
+          </Box>
+
+          {/* Descripción del plan seleccionado */}
+          {planPago && (
+            <Box sx={{ mb: 4 }}>
+              <Typography sx={{ color: "#ccc", mb: 1 }}>
+                {
+                  {
+                    transferencia1: "Pago único con transferencia bancaria.",
+                    transferencia6:
+                      "6 cuotas fijas sin interés por transferencia.",
+                    tarjeta: "Pagá con tu tarjeta en cuotas.",
+                  }[planPago]
+                }
+              </Typography>
+
+              {/* Mostrar info adicional del descuento */}
+              {planPago === "transferencia1" && (
+                <Box
+                  sx={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 1,
+                    backgroundColor: "#d32f2f",
+                    color: "white",
+                    padding: "8px 16px",
+                    borderRadius: "8px",
+                    fontWeight: "bold",
+                    fontSize: "0.9rem",
+                    mt: 1,
+                  }}
+                >
+                  🔥 50% DESCUENTO
+                </Box>
+              )}
             </Box>
+          )}
 
             {/* Nombre y apellido */}
             <Box
@@ -654,7 +720,7 @@ const LandingPage: React.FC = () => {
                   ? "Formato de WhatsApp inválido"
                   : "Incluye código de país (ej: +54)"
               }
-              sx={{ mb: 3, maxWidth: 700 }}
+              sx={{ mb: 3, maxWidth: 600 }}
               InputProps={{
                 startAdornment: (
                   <Phone sx={{ color: "text.secondary", mr: 1 }} />
@@ -670,7 +736,7 @@ const LandingPage: React.FC = () => {
                 onClick={handleInscripcion}
                 disabled={isLoading || !isInscripcionFormValid()}
                 startIcon={
-                  isLoading ? <CircularProgress size={20} /> : <Payment />
+                  isLoading && <CircularProgress size={20} /> 
                 }
                 sx={{
                   py: 1.5,

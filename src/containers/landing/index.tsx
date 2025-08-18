@@ -385,7 +385,6 @@ const LandingPage: React.FC = () => {
                 CONTENIDO DEL CURSO:
               </Typography>
 
-              {/* Botón a la derecha */}
               <Button
                 endIcon={
                   <Box
@@ -564,7 +563,6 @@ const LandingPage: React.FC = () => {
                 >
                   <ListItemIcon>
                     <CheckCircleIcon sx={{ color: "#22c55e" }} />{" "}
-                    {/* verde check */}
                   </ListItemIcon>
                   <Typography sx={{ color: "#D1D5DB" }}>{text}</Typography>
                 </ListItem>
@@ -642,7 +640,6 @@ const LandingPage: React.FC = () => {
 
         <Paper sx={{ p: 4, textAlign: "center", backgroundColor: "#0a0a0a" }}>
           <Box sx={{ mb: 4 }}>
-            {/* Precio + descuento */}
             {planPago === "transferencia1" && (
               <Box sx={{ mb: 3, textAlign: "center" }}>
                 {/* Precio tachado */}
@@ -656,7 +653,6 @@ const LandingPage: React.FC = () => {
                   $360.000
                 </Typography>
 
-                {/* Precio con descuento + badge */}
                 <Box
                   sx={{
                     display: "flex",
@@ -699,7 +695,6 @@ const LandingPage: React.FC = () => {
             )}
             {planPago === "transferencia6" && (
               <Box sx={{ mb: 3, textAlign: "center" }}>
-                {/* Precio con descuento + badge */}
                 <Box
                   sx={{
                     display: "flex",
@@ -732,7 +727,6 @@ const LandingPage: React.FC = () => {
                 </Box>
               </Box>
             )}
-            {/* Botones de plan de pago */}
             <Box
               sx={{
                 display: "flex",

@@ -284,31 +284,31 @@ const LandingPage: React.FC = () => {
 
   return (
     <Layout>
-      {!isMobile && (
-        <Alert
-          severity="error"
-          icon={false}
-          sx={{
-            backgroundColor: "#B01010",
-            color: "white",
-            position: "fixed",
-            top: "64px",
-            zIndex: (theme) => theme.zIndex.drawer + 1,
-            left: 0,
-            width: "100%",
-            textAlign: "center",
-            // zIndex: 1200,
-          }}
-        >
-          🎉 Hasta el 30/08 💥 40% de descuento en el curso 👉 Desarrollo Web
-          FullStack
-        </Alert>
-      )}
+      <Alert
+        severity="error"
+        icon={false}
+        sx={{
+          backgroundColor: "#B01010",
+          color: "white",
+          position: "fixed",
+          top: isMobile ? "52px" : "64px",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          left: 0,
+          width: "100%",
+          textAlign: "center",
+          // zIndex: 1200,
+        }}
+      >
+        {isMobile
+          ? `Hasta el 30/08 💥 40% OFF en Curso FullStack Developer`
+          : `🎉 Hasta el 30/08 💥 40% de descuento en el curso 👉 Desarrollo Web
+          FullStack`}
+      </Alert>
 
       <Grid item sm={12} md={12} lg={12}>
         <Box
           sx={{
-            marginTop: !isMobile ? "65px" : "20px",
+            marginTop: !isMobile ? "65px" : "60px",
             height: "69vh",
             backgroundImage: "url('/mujer-programando.png')",
             backgroundSize: "cover",

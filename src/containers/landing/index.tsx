@@ -53,6 +53,7 @@ const LandingPage: React.FC = () => {
   const [inscripcionApellido, setInscripcionApellido] = useState<string>("");
   const [inscripcionWhatsapp, setInscripcionWhatsapp] = useState<string>("");
   const [consultaEmail, setConsultaEmail] = useState<string>("");
+  const [consultaTexto, setConsultaTexto] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [planPago, setPlanPago] = useState<string>("");
   const [alert, setAlert] = useState<{
@@ -127,7 +128,7 @@ const LandingPage: React.FC = () => {
     }
   };
 
-  const handleConsulta = async () => {
+  const handleConsultaDisponible = async () => {
     if (!consultaEmail || !isValidEmail(consultaEmail)) {
       showAlert("error", "Por favor ingresá un email válido.");
       return;
@@ -147,6 +148,37 @@ const LandingPage: React.FC = () => {
       );
       setConsultaEmail("");
       navigate("/consulta");
+    } catch (error: any) {
+      console.error("Error:", error);
+      showAlert(
+        "error",
+        error.message ||
+          "Error al enviar la consulta. Por favor, intentá nuevamente."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleConsulta = async () => {
+    if (!consultaEmail || !isValidEmail(consultaEmail)) {
+      showAlert("error", "Por favor ingresá un email válido.");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await apiService.sendConsultation({
+        email: consultaEmail.trim(),
+        message: consultaTexto,
+      });
+
+      showAlert(
+        "success",
+        "¡Gracias por tu consulta! En minutos nos estaremos comunicando con vos."
+      );
+      setConsultaEmail("");
+      setConsultaTexto("");
     } catch (error: any) {
       console.error("Error:", error);
       showAlert(
@@ -1027,7 +1059,7 @@ const LandingPage: React.FC = () => {
                 variant="contained"
                 color="secondary"
                 size="large"
-                onClick={handleConsulta}
+                onClick={handleConsultaDisponible}
                 disabled={
                   isLoading ||
                   !isValidEmail(consultaEmail) ||
@@ -1101,6 +1133,66 @@ const LandingPage: React.FC = () => {
             </Typography>
           </Grid>
         </Grid>
+      </Grid>
+      <Grid item sm={12} md={12} lg={12}>
+        <Box
+        id="contacto"
+          sx={{
+            backgroundColor: "#111",
+            p: 3,
+            borderRadius: 2,
+            color: "white",
+          }}
+        >
+          <Typography variant="h2" gutterBottom>Escribinos</Typography>
+          <Typography variant="body1" gutterBottom>Y te asesoramos en lo que necesites.</Typography>
+
+          <TextField
+            label="Tu Email"
+            type="email"
+            fullWidth
+            value={consultaEmail}
+            onChange={(e) => setConsultaEmail(e.target.value)}
+            margin="normal"
+            InputProps={{ style: { color: "white" } }}
+            InputLabelProps={{ style: { color: "gray" } }}
+          />
+
+          <TextField
+            label="Tu consulta"
+            fullWidth
+            multiline
+            rows={4}
+            value={consultaTexto}
+            onChange={(e) => setConsultaTexto(e.target.value)}
+            margin="normal"
+            InputProps={{ style: { color: "white" } }}
+            InputLabelProps={{ style: { color: "gray" } }}
+          />
+
+          <Box mt={2}>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              onClick={handleConsulta}
+              disabled={
+                isLoading ||
+                !isValidEmail(consultaEmail) ||
+                consultaTexto.trim() === ""
+              }
+              startIcon={isLoading ? <CircularProgress size={20} /> : <Email />}
+              sx={{
+                py: 1.5,
+                px: 4,
+                fontSize: "1.1rem",
+                fontWeight: "bold",
+              }}
+            >
+              {isLoading ? "ENVIANDO..." : "CONSULTAR"}
+            </Button>
+          </Box>
+        </Box>
       </Grid>
     </Layout>
   );

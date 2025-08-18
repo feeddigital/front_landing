@@ -34,7 +34,7 @@ const Navbar = () => {
           <Button component={Link} to="/quienes-somos" sx={{ color: "white" }}>
             Quienes somos
           </Button>
-          <Button component={Link} to="/contacto" sx={{ color: "white" }}>
+          <Button component="a" href="#contacto" sx={{ color: "white" }}>
             Contacto
           </Button>
         </Box>

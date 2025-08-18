@@ -22,6 +22,7 @@ import {
   useTheme,
   useMediaQuery,
   List,
+  Alert,
 } from "@mui/material";
 import {
   Code,
@@ -53,7 +54,7 @@ const LandingPage: React.FC = () => {
   const [consultaEmail, setConsultaEmail] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [planPago, setPlanPago] = useState<string>("");
-  const [_alert, setAlert] = useState<{
+  const [alert, setAlert] = useState<{
     type: "success" | "error";
     message: string;
   } | null>(null);
@@ -87,7 +88,7 @@ const LandingPage: React.FC = () => {
         nombre: inscripcionNombre.trim(),
         apellido: inscripcionApellido.trim(),
         email: inscripcionEmail.trim(),
-        whatsapp: inscripcionWhatsapp.trim() || undefined,
+        whatsapp: inscripcionWhatsapp.trim(),
         planPago: planPago,
       };
 
@@ -163,7 +164,7 @@ const LandingPage: React.FC = () => {
   };
 
   const isValidWhatsapp = (whatsapp: string): boolean => {
-    if (!whatsapp) return true; // WhatsApp es opcional
+    if (!whatsapp) return true;
     const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,15}$/;
     return phoneRegex.test(whatsapp.replace(/\s/g, ""));
   };
@@ -174,7 +175,8 @@ const LandingPage: React.FC = () => {
       inscripcionApellido.trim() !== "" &&
       isValidEmail(inscripcionEmail) &&
       inscripcionEmail !== "" &&
-      (inscripcionWhatsapp === "" || isValidWhatsapp(inscripcionWhatsapp))
+      inscripcionWhatsapp.includes("+") &&
+      isValidWhatsapp(inscripcionWhatsapp)
     );
   };
 
@@ -281,6 +283,24 @@ const LandingPage: React.FC = () => {
 
   return (
     <Grid sx={{ pl: 2, pr: 2, pb: 2 }}>
+      <Alert
+        severity="error"
+        icon={false}
+        sx={{
+          backgroundColor: "#B01010", // 👈 tu color personalizado
+    color: "white", // 👈 color del texto
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          textAlign: "center",
+          zIndex: 1200,
+        }}
+      >
+        🎉 Hasta el 30/08 💥 40% de descuento en el curso 👉 Desarrollo Web
+        FullStack
+      </Alert>
+
       <Grid item sm={12} md={12} lg={12}>
         <Box
           sx={{
@@ -304,6 +324,25 @@ const LandingPage: React.FC = () => {
                 backgroundColor: "rgba(0, 0, 0, 0.66)", // Mejora el contraste del texto
               }}
             >
+              {/* Alert */}{" "}
+              {alert && (
+                <Alert
+                  severity={alert.type}
+                  sx={{
+                    position: "fixed",
+                    bottom: 20,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: "90%",
+                    maxWidth: 400,
+                    zIndex: 9999,
+                  }}
+                  onClose={() => setAlert(null)}
+                >
+                  {" "}
+                  {alert.message}{" "}
+                </Alert>
+              )}
               {!isMobile ? (
                 <Avatar
                   src="/LOGO_CUADRADO.jpg"
@@ -343,7 +382,6 @@ const LandingPage: React.FC = () => {
                   </Avatar>
                 </Box>
               )}
-
               <Typography variant="h1" component="h1" gutterBottom>
                 Aprendé Desarrollo Web Fullstack
               </Typography>
@@ -915,17 +953,13 @@ const LandingPage: React.FC = () => {
               fullWidth
               variant="outlined"
               type="tel"
-              label="WhatsApp (opcional)"
-              placeholder="+54 9 11 1234-5678"
+              label="WhatsApp*"
+              placeholder="+5411123-5678"
               value={inscripcionWhatsapp}
               onChange={(e) => setInscripcionWhatsapp(e.target.value)}
               disabled={isLoading}
-              error={
-                inscripcionWhatsapp !== "" &&
-                !isValidWhatsapp(inscripcionWhatsapp)
-              }
+              error={!isValidWhatsapp(inscripcionWhatsapp)}
               helperText={
-                inscripcionWhatsapp !== "" &&
                 !isValidWhatsapp(inscripcionWhatsapp)
                   ? "Formato de WhatsApp inválido"
                   : "Incluye código de país (ej: +54)"
@@ -991,7 +1025,11 @@ const LandingPage: React.FC = () => {
                 color="secondary"
                 size="large"
                 onClick={handleConsulta}
-                disabled={isLoading || !isValidEmail(consultaEmail)}
+                disabled={
+                  isLoading ||
+                  !isValidEmail(consultaEmail) ||
+                  !isValidWhatsapp(inscripcionWhatsapp)
+                }
                 startIcon={
                   isLoading ? <CircularProgress size={20} /> : <Email />
                 }

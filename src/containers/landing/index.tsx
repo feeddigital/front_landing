@@ -1144,8 +1144,8 @@ const LandingPage: React.FC = () => {
             color: "white",
           }}
         >
-          <Typography variant="h2" gutterBottom>Escribinos</Typography>
-          <Typography variant="body1" gutterBottom>Y te asesoramos en lo que necesites.</Typography>
+          <Typography variant="h2" gutterBottom>Contacto</Typography>
+          <Typography variant="body1" gutterBottom>Escribinos y respondemos tus dudas.</Typography>
 
           <TextField
             label="Tu Email"

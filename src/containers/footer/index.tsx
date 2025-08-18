@@ -1,8 +1,10 @@
 import { Box, Container, Typography, Link, IconButton } from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <Box
       component="footer"
@@ -25,6 +27,14 @@ const Footer = () => {
         <Typography variant="body2">©2025 Digital Dev</Typography>
 
         <Box sx={{ display: "flex", gap: 2 }}>
+          <Typography
+            variant="body2"
+            sx={{ marginTop: 1, cursor: "pointer" }}
+            onClick={() => navigate("/privacidad")}
+          >
+            Política de privacidad
+          </Typography>
+
           <IconButton
             component={Link}
             href="https://instagram.com/digitaldevcursos"

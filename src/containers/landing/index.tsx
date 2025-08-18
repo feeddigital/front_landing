@@ -35,6 +35,8 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DataObjectIcon from "@mui/icons-material/DataObject";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
 
 import { apiService } from "../../services/api-service";
 
@@ -57,9 +59,9 @@ const LandingPage: React.FC = () => {
 
   // Links según plan
   const linksMercadoPago: Record<string, string> = {
-    transferencia1: "https://mpago.li/link-transferencia-1pago",
-    transferencia6: "https://mpago.li/link-transferencia-6pagos",
-    tarjeta: "https://mpago.li/2avsyVs",
+    transferencia1: "/exito",
+    transferencia6: "/exito",
+    tarjeta: "https://mpago.la/1fYbiUo",
   };
 
   const showAlert = (type: "success" | "error", message: string) => {
@@ -93,15 +95,12 @@ const LandingPage: React.FC = () => {
         "¡Inscripción enviada correctamente! Redirigiendo al pago..."
       );
 
-      // Pequeño delay para mostrar el mensaje antes de redirigir
       setTimeout(() => {
         const link = linksMercadoPago[planPago];
-        if (link && link !== "#") {
+        if (link && link !== "#" && !planPago.startsWith("transferencia")) {
           window.location.href = link;
         } else {
-          navigate("/success", {
-            state: { type: "inscription", data: subscriptionData },
-          });
+          navigate("/exito");
         }
       }, 2000);
 
@@ -519,101 +518,234 @@ const LandingPage: React.FC = () => {
         </Grid>
       </Grid>
       <Grid item sm={6} md={8} lg={8}>
-        <Paper sx={{ p: 4, textAlign: "center", backgroundColor: "#0a0a0a" }}>
-          <Box sx={{ mb: 4 }}>
-                      {/* Botones de plan de pago */}
-          <Box
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 1,
+            mb: 3,
+          }}
+        >
+          <Typography
             sx={{
-              display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
-              gap: 2,
-              mb: 2,
-              justifyContent: "center",
-              flexWrap: "wrap",
+              fontSize: "1.1rem",
+              fontWeight: "bold",
+              color: "#D1D5DB",
+              textTransform: "uppercase",
+              letterSpacing: "0.5px",
             }}
           >
-            {[
-              {
-                value: "transferencia1",
-                label: "Transferencia 1 pago",
-                desc: "Pago único con transferencia bancaria.",
-                hasDiscount: true,
-              },
-              {
-                value: "transferencia6",
-                label: "Transferencia 6 pagos",
-                desc: "6 cuotas fijas sin interés por transferencia.",
-                hasDiscount: false,
-              },
-              {
-                value: "tarjeta",
-                label: "Tarjeta de crédito",
-                desc: "Pagá con tu tarjeta en cuotas.",
-                hasDiscount: false,
-              },
-            ].map((plan) => (
-              <Box
-                key={plan.value}
-                sx={{ position: "relative", display: "inline-block" }}
-              >    
-                <Button
-                  variant={planPago === plan.value ? "contained" : "outlined"}
-                  color={planPago === plan.value ? "primary" : "inherit"}
-                  onClick={() => setPlanPago(plan.value)}
+            Seleccioná la opción de pago
+          </Typography>
+          <Box
+            sx={{
+              border: "2px solid #D1D5DB",
+              borderRadius: "50%",
+              p: 0.5,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ArrowDownwardIcon sx={{ color: "#D1D5DB", fontSize: "1.2rem" }} />
+          </Box>
+        </Box>
+
+        <Paper sx={{ p: 4, textAlign: "center", backgroundColor: "#0a0a0a" }}>
+          <Box sx={{ mb: 4 }}>
+            {/* Precio + descuento */}
+            {planPago === "transferencia1" && (
+              <Box sx={{ mb: 3, textAlign: "center" }}>
+                {/* Precio tachado */}
+                <Typography
                   sx={{
-                    minWidth: 200,
-                    borderRadius: "8px",
-                    fontWeight: "bold",
-                    backgroundColor:
-                      planPago === plan.value ? "primary.main" : "transparent",
-                    color: planPago === plan.value ? "#fff" : "#ccc",
-                    "&:hover": {
-                      backgroundColor:
-                        planPago === plan.value ? "primary.dark" : "#1f1f1f",
-                    },
+                    fontSize: "1.2rem",
+                    color: "#aaa",
+                    textDecoration: "line-through",
                   }}
                 >
-                  {plan.label}
-                </Button>
-              </Box>
-            ))}
-          </Box>
+                  $360.000
+                </Typography>
 
-          {/* Descripción del plan seleccionado */}
-          {planPago && (
-            <Box sx={{ mb: 4 }}>
-              <Typography sx={{ color: "#ccc", mb: 1 }}>
-                {
-                  {
-                    transferencia1: "Pago único con transferencia bancaria.",
-                    transferencia6:
-                      "6 cuotas fijas sin interés por transferencia.",
-                    tarjeta: "Pagá con tu tarjeta en cuotas.",
-                  }[planPago]
-                }
-              </Typography>
-
-              {/* Mostrar info adicional del descuento */}
-              {planPago === "transferencia1" && (
+                {/* Precio con descuento + badge */}
                 <Box
                   sx={{
-                    display: "inline-flex",
+                    display: "flex",
                     alignItems: "center",
-                    gap: 1,
-                    backgroundColor: "#d32f2f",
-                    color: "white",
-                    padding: "8px 16px",
-                    borderRadius: "8px",
-                    fontWeight: "bold",
-                    fontSize: "0.9rem",
+                    justifyContent: "center",
+                    gap: 1.5,
                     mt: 1,
                   }}
                 >
-                  🔥 50% DESCUENTO
+                  <Typography
+                    sx={{
+                      fontSize: "2rem",
+                      fontWeight: "bold",
+                      color: "#fff",
+                    }}
+                  >
+                    $216.000
+                  </Typography>
+
+                  <Box
+                    sx={{
+                      backgroundColor: "#e53935",
+                      color: "#fff",
+                      fontWeight: "bold",
+                      borderRadius: "6px",
+                      px: 1.5,
+                      py: 0.5,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 0.5,
+                    }}
+                  >
+                    <WhatshotIcon sx={{ fontSize: "1rem" }} />
+                    <Typography sx={{ fontSize: "0.9rem", fontWeight: "bold" }}>
+                      40% OFF
+                    </Typography>
+                  </Box>
                 </Box>
-              )}
+              </Box>
+            )}
+            {planPago === "transferencia6" && (
+              <Box sx={{ mb: 3, textAlign: "center" }}>
+                {/* Precio con descuento + badge */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 1.5,
+                    mt: 1,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "1.1rem",
+                      fontWeight: "bold",
+                      color: "#D1D5DB",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px",
+                    }}
+                  >
+                    Pago mensual
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "2rem",
+                      fontWeight: "bold",
+                      color: "#fff",
+                    }}
+                  >
+                    $60.000
+                  </Typography>
+                </Box>
+              </Box>
+            )}
+            {/* Botones de plan de pago */}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                gap: 2,
+                mb: 2,
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              {[
+                {
+                  value: "transferencia1",
+                  label: "Transferencia 1 pago",
+                  desc: "Pago único con transferencia bancaria.",
+                  hasDiscount: true,
+                },
+                {
+                  value: "transferencia6",
+                  label: "Transferencia 6 pagos",
+                  desc: "6 cuotas fijas sin interés por transferencia.",
+                  hasDiscount: false,
+                },
+                {
+                  value: "tarjeta",
+                  label: "Tarjeta de crédito",
+                  desc: "Pagá con tu tarjeta en cuotas.",
+                  hasDiscount: false,
+                },
+              ].map((plan) => (
+                <Box
+                  key={plan.value}
+                  sx={{ position: "relative", display: "inline-block" }}
+                >
+                  <Button
+                    variant={planPago === plan.value ? "contained" : "outlined"}
+                    color={planPago === plan.value ? "primary" : "inherit"}
+                    onClick={() => setPlanPago(plan.value)}
+                    sx={{
+                      minWidth: 200,
+                      borderRadius: "8px",
+                      fontWeight: "bold",
+                      backgroundColor:
+                        planPago === plan.value
+                          ? "primary.main"
+                          : "transparent",
+                      color: planPago === plan.value ? "#fff" : "#ccc",
+                      "&:hover": {
+                        backgroundColor:
+                          planPago === plan.value ? "primary.dark" : "#1f1f1f",
+                      },
+                      position: "relative",
+                      overflow: "visible",
+                    }}
+                  >
+                    {plan.label}
+                  </Button>
+
+                  {/* 🔥 Badge solo si es transferencia1 */}
+                  {plan.value === "transferencia1" && (
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: -15,
+                        right: -1,
+                        backgroundColor: "#e53935",
+                        color: "#fff",
+                        fontWeight: "bold",
+                        borderRadius: "6px",
+                        px: 1,
+                        py: 0.3,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 0.3,
+                        fontSize: "0.75rem",
+                        boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+                      }}
+                    >
+                      <WhatshotIcon sx={{ fontSize: "1rem" }} />
+                      40% OFF
+                    </Box>
+                  )}
+                </Box>
+              ))}
             </Box>
-          )}
+
+            {/* Descripción del plan seleccionado */}
+            {planPago && (
+              <Box sx={{ mb: 4 }}>
+                <Typography sx={{ color: "#ccc", mb: 1 }}>
+                  {
+                    {
+                      transferencia1: "Pago único con transferencia bancaria.",
+                      transferencia6:
+                        "6 cuotas fijas sin interés por transferencia.",
+                      tarjeta: "Pagá con tu tarjeta en cuotas.",
+                    }[planPago]
+                  }
+                </Typography>
+              </Box>
+            )}
 
             {/* Nombre y apellido */}
             <Box
@@ -735,9 +867,7 @@ const LandingPage: React.FC = () => {
                 size="large"
                 onClick={handleInscripcion}
                 disabled={isLoading || !isInscripcionFormValid()}
-                startIcon={
-                  isLoading && <CircularProgress size={20} /> 
-                }
+                startIcon={isLoading && <CircularProgress size={20} />}
                 sx={{
                   py: 1.5,
                   px: 4,

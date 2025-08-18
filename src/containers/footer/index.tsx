@@ -27,7 +27,7 @@ const Footer = () => {
         <Box sx={{ display: "flex", gap: 2 }}>
           <IconButton
             component={Link}
-            href="https://instagram.com/tucuenta"
+            href="https://instagram.com/digitaldevcursos"
             target="_blank"
             rel="noopener"
             sx={{ color: "white" }}
@@ -36,7 +36,7 @@ const Footer = () => {
           </IconButton>
           <IconButton
             component={Link}
-            href="https://linkedin.com/in/tucuenta"
+            href="https://linkedin.com/in/"
             target="_blank"
             rel="noopener"
             sx={{ color: "white" }}

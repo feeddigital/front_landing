@@ -43,6 +43,7 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import { apiService } from "../../services/api-service";
+import Layout from "../layout";
 
 const LandingPage: React.FC = () => {
   const theme = useTheme();
@@ -282,29 +283,32 @@ const LandingPage: React.FC = () => {
   ];
 
   return (
-    <Grid sx={{ pl: 2, pr: 2, pb: 2 }}>
-      <Alert
-        severity="error"
-        icon={false}
-        sx={{
-          backgroundColor: "#B01010",
-          color: "white",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          textAlign: "center",
-          zIndex: 1200,
-        }}
-      >
-        🎉 Hasta el 30/08 💥 40% de descuento en el curso 👉 Desarrollo Web
-        FullStack
-      </Alert>
+    <Layout>
+      {!isMobile && (
+        <Alert
+          severity="error"
+          icon={false}
+          sx={{
+            backgroundColor: "#B01010",
+            color: "white",
+            position: "fixed",
+            top: "64px",
+            zIndex: (theme) => theme.zIndex.drawer + 1,
+            left: 0,
+            width: "100%",
+            textAlign: "center",
+            // zIndex: 1200,
+          }}
+        >
+          🎉 Hasta el 30/08 💥 40% de descuento en el curso 👉 Desarrollo Web
+          FullStack
+        </Alert>
+      )}
 
       <Grid item sm={12} md={12} lg={12}>
         <Box
           sx={{
-            marginTop: "10px",
+            marginTop: !isMobile ? "65px" : "20px",
             height: "69vh",
             backgroundImage: "url('/mujer-programando.png')",
             backgroundSize: "cover",
@@ -321,7 +325,7 @@ const LandingPage: React.FC = () => {
               xs={12}
               md={12}
               sx={{
-                backgroundColor: "rgba(0, 0, 0, 0.66)", // Mejora el contraste del texto
+                backgroundColor: "rgba(0, 0, 0, 0.66)",
               }}
             >
               {/* Alert */}{" "}
@@ -573,7 +577,6 @@ const LandingPage: React.FC = () => {
             sx={{
               backgroundColor: "#121212",
               borderRadius: 3,
-              // maxWidth: 800,
               mx: "auto",
               p: 3,
             }}
@@ -1073,7 +1076,33 @@ const LandingPage: React.FC = () => {
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
+      <Grid item sm={12} md={12} lg={12}>
+        <Grid container spacing={4} alignItems="center">
+          <Grid item xs={12} md={6}>
+            <Box
+              component="img"
+              src="/discord.JPG"
+              alt="Discord"
+              sx={{
+                maxWidth: "100%",
+                height: "auto",
+                borderRadius: 2,
+                border: "2px solid #9ca3af",
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography variant="h2" gutterBottom>
+              Comunidad Discord
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              No enfrentarás este camino solo, tendrás el apoyo de los
+              profesores, mentores y compañeros.
+            </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Layout>
   );
 };
 export default LandingPage;

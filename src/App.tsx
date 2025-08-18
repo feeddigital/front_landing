@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { darkTheme } from './theme/theme';
-// import Navbar from './containers/navbar';
 import LandingPage from './containers/landing';
 import Exito from './containers/exito';
 import RespuestaContacto from './containers/respuesta-contacto';
@@ -12,7 +11,6 @@ const App: React.FC = () => {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Router>
-        {/* <Navbar /> */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/exito" element={<Exito />} />

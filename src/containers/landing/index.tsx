@@ -21,6 +21,7 @@ import {
   AccordionDetails,
   useTheme,
   useMediaQuery,
+  List,
 } from "@mui/material";
 import {
   Code,
@@ -36,7 +37,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DataObjectIcon from "@mui/icons-material/DataObject";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import { apiService } from "../../services/api-service";
 
@@ -141,6 +144,7 @@ const LandingPage: React.FC = () => {
         "¡Gracias por tu consulta! En minutos nos estaremos comunicando con vos."
       );
       setConsultaEmail("");
+      navigate("/consulta");
     } catch (error: any) {
       console.error("Error:", error);
       showAlert(
@@ -178,7 +182,12 @@ const LandingPage: React.FC = () => {
     { text: "Lunes y Miércoles", icon: <CalendarToday />, color: "secondary" },
     { text: "20 a 22hs.", icon: <Schedule />, color: "success" },
     {
-      text: "Clases comienzan 01/09",
+      text: "6 meses",
+      icon: <CalendarToday />,
+      color: "primary",
+    },
+    {
+      text: "Comienza 01/09",
       icon: <CalendarToday />,
       color: "secondary",
     },
@@ -360,13 +369,50 @@ const LandingPage: React.FC = () => {
       <Grid item sm={12} md={12} lg={12} sx={{ marginTop: 6 }}>
         <Card sx={{ backgroundColor: "#0a0a0a", marginBottom: 5 }}>
           <CardContent>
-            <Typography
-              variant="subtitle1"
-              align="left"
-              sx={{ color: "#D1D5DB", mb: 2, letterSpacing: 1 }}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                mb: 2,
+              }}
             >
-              CONTENIDO DEL CURSO:
-            </Typography>
+              <Typography
+                variant="subtitle1"
+                align="left"
+                sx={{ color: "#D1D5DB", letterSpacing: 1 }}
+              >
+                CONTENIDO DEL CURSO:
+              </Typography>
+
+              {/* Botón a la derecha */}
+              <Button
+                endIcon={
+                  <Box
+                    sx={{
+                      border: "2px solid #D1D5DB",
+                      borderRadius: "50%",
+                      width: 22,
+                      height: 22,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <ArrowForwardIcon sx={{ fontSize: 14, color: "#D1D5DB" }} />
+                  </Box>
+                }
+                sx={{
+                  color: "#D1D5DB",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  fontSize: "0.9rem",
+                  "&:hover": { backgroundColor: "transparent" },
+                }}
+              >
+                VER RUTA DE ESTUDIO
+              </Button>
+            </Box>
 
             {courseContent.map((item, index) => (
               <Accordion
@@ -415,7 +461,6 @@ const LandingPage: React.FC = () => {
       </Grid>
       <Grid item sm={12} md={12} lg={12}>
         <Grid container spacing={4} alignItems="center">
-          {/* Texto */}
           <Grid item xs={12} md={6}>
             <Typography variant="h2" gutterBottom>
               ¿Ser Fullstack Web Developer?
@@ -433,7 +478,6 @@ const LandingPage: React.FC = () => {
             </Typography>
           </Grid>
 
-          {/* Imagen */}
           <Grid item xs={12} md={6}>
             <Box
               component="img"
@@ -486,6 +530,50 @@ const LandingPage: React.FC = () => {
           </Grid>
         </Box>
       </Grid>
+      <Grid item sm={12} md={12} lg={12}>
+        <Box sx={{ backgroundColor: "#0a0a0a", py: 5 }}>
+          <Card
+            sx={{
+              backgroundColor: "#121212",
+              borderRadius: 3,
+              // maxWidth: 800,
+              mx: "auto",
+              p: 3,
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{ color: "white", mb: 3, fontWeight: "bold" }}
+            >
+              ¿Qué incluye tu formación?
+            </Typography>
+
+            <List>
+              {[
+                "Clases online en vivo con instructores con +5 años de experiencia formando desarrolladores",
+                "Certificado de finalización de carrera",
+                "Acceso a grabación de clases",
+                "Revisión de proyectos finales y respuesta a consultas de manera personalizada",
+              ].map((text, i) => (
+                <ListItem
+                  key={i}
+                  sx={{
+                    borderBottom: "1px solid rgba(255,255,255,0.1)",
+                    px: 0,
+                  }}
+                >
+                  <ListItemIcon>
+                    <CheckCircleIcon sx={{ color: "#22c55e" }} />{" "}
+                    {/* verde check */}
+                  </ListItemIcon>
+                  <Typography sx={{ color: "#D1D5DB" }}>{text}</Typography>
+                </ListItem>
+              ))}
+            </List>
+          </Card>
+        </Box>
+      </Grid>
+
       <Grid item sm={12} md={12} lg={12} sx={{ marginBottom: 3, marginTop: 3 }}>
         <Grid>
           <Card sx={{ height: "100%", backgroundColor: "#0a0a0a" }}>
@@ -495,7 +583,7 @@ const LandingPage: React.FC = () => {
               </Typography>
               <Grid container spacing={2}>
                 {scheduleItems.map((item, index) => (
-                  <Grid item xs={12} md={4} key={index}>
+                  <Grid item xs={12} md={3} key={index}>
                     <ListItem sx={{ py: 1 }}>
                       <ListItemIcon
                         sx={{ color: `${item.color}.main`, minWidth: 40 }}
@@ -517,7 +605,7 @@ const LandingPage: React.FC = () => {
           </Card>
         </Grid>
       </Grid>
-      <Grid item sm={6} md={8} lg={8}>
+      <Grid item sm={6} md={8} lg={8} sx={{ mb: 5 }}>
         <Box
           sx={{
             display: "flex",
@@ -703,7 +791,6 @@ const LandingPage: React.FC = () => {
                     {plan.label}
                   </Button>
 
-                  {/* 🔥 Badge solo si es transferencia1 */}
                   {plan.value === "transferencia1" && (
                     <Box
                       sx={{
@@ -747,7 +834,6 @@ const LandingPage: React.FC = () => {
               </Box>
             )}
 
-            {/* Nombre y apellido */}
             <Box
               sx={{
                 display: "flex",
@@ -808,7 +894,6 @@ const LandingPage: React.FC = () => {
               />
             </Box>
 
-            {/* Email */}
             <TextField
               fullWidth
               variant="outlined"
@@ -832,7 +917,6 @@ const LandingPage: React.FC = () => {
               }}
             />
 
-            {/* WhatsApp */}
             <TextField
               fullWidth
               variant="outlined"
@@ -860,7 +944,6 @@ const LandingPage: React.FC = () => {
               }}
             />
 
-            {/* Botón inscripción */}
             <Box>
               <Button
                 variant="contained"
@@ -882,7 +965,6 @@ const LandingPage: React.FC = () => {
 
           <Divider sx={{ my: 3 }} />
 
-          {/* Consultas */}
           <Typography variant="h6" sx={{ mb: 3 }}>
             Consultá por otros días y horarios disponibles:
           </Typography>
@@ -931,6 +1013,33 @@ const LandingPage: React.FC = () => {
             </Box>
           </Box>
         </Paper>
+      </Grid>
+      <Grid item sm={12} md={12} lg={12}>
+        <Grid container spacing={4} alignItems="center">
+          <Grid item xs={12} md={6}>
+            <Typography variant="h2" gutterBottom>
+              Recibí tu certificado de finalización
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Un premio al esfuerzo, pero los objetivos son el conocimiento y la
+              experiencia.
+            </Typography>
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <Box
+              component="img"
+              src="/certificado.jpg"
+              alt="Certificado"
+              sx={{
+                maxWidth: "100%",
+                height: "auto",
+                borderRadius: 2,
+                border: "2px solid #9ca3af",
+              }}
+            />
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );

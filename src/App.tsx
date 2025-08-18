@@ -5,6 +5,7 @@ import { darkTheme } from './theme/theme';
 // import Navbar from './containers/navbar';
 import LandingPage from './containers/landing';
 import Exito from './containers/exito';
+import RespuestaContacto from './containers/respuesta-contacto';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/exito" element={<Exito />} />
+          <Route path="/consulta" element={<RespuestaContacto />} />
         </Routes>
       </Router>
     </ThemeProvider>

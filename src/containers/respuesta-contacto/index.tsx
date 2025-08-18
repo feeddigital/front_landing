@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, Paper, Button, Box } from "@mui/material";
-import { CheckCircle, Home } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
 
 const RespuestaContacto: React.FC = () => {
   const navigate = useNavigate();
@@ -9,14 +9,6 @@ const RespuestaContacto: React.FC = () => {
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
       <Paper sx={{ p: 4, textAlign: "center" }}>
-        {/* <CheckCircle
-          sx={{
-            fontSize: 80,
-            color: "success.main",
-            mb: 3,
-          }}
-        /> */}
-
         <Typography
           variant="h2"
           component="h1"

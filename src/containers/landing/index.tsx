@@ -317,10 +317,10 @@ const LandingPage: React.FC = () => {
   return (
     <Layout>
       <Alert
-        severity="error"
+        severity="warning"
         icon={false}
         sx={{
-          backgroundColor: "#B01010",
+          backgroundColor: "rgba(252, 102, 2, 0.66)",
           color: "white",
           position: "fixed",
           top: isMobile ? "52px" : "64px",

@@ -31,7 +31,7 @@ const Navbar = () => {
         <Box sx={{ flexGrow: 1 }} />
 
         <Box>
-          <Button component={Link} to="/quienes-somos" sx={{ color: "white" }}>
+          <Button component={Link} to="/" sx={{ color: "white" }}>
             Quienes somos
           </Button>
           <Button component="a" href="#contacto" sx={{ color: "white" }}>

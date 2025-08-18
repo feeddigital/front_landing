@@ -287,8 +287,8 @@ const LandingPage: React.FC = () => {
         severity="error"
         icon={false}
         sx={{
-          backgroundColor: "#B01010", // 👈 tu color personalizado
-    color: "white", // 👈 color del texto
+          backgroundColor: "#B01010",
+          color: "white",
           position: "fixed",
           top: 0,
           left: 0,

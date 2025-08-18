@@ -22,7 +22,7 @@ export const darkTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Ubuntu", sans-serif',
+    fontFamily: '"DM Sans", sans-serif',
     h1: {
       fontSize: "2.5rem",
       fontWeight: 700,

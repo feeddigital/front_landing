@@ -6,6 +6,7 @@ import LandingPage from "./containers/landing";
 import Exito from "./containers/exito";
 import RespuestaContacto from "./containers/respuesta-contacto";
 import PoliticaPrivacidad from "./containers/policy";
+import Programa from "./containers/programa";
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/programa" element={<Programa />} />
           <Route path="/exito" element={<Exito />} />
           <Route path="/consulta" element={<RespuestaContacto />} />
           <Route path="/privacidad" element={<PoliticaPrivacidad />} />

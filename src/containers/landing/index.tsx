@@ -63,7 +63,6 @@ const LandingPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // Links según plan
   const linksMercadoPago: Record<string, string> = {
     transferencia1: "/exito",
     transferencia6: "/exito",
@@ -328,7 +327,13 @@ const LandingPage: React.FC = () => {
           left: 0,
           width: "100%",
           textAlign: "center",
-          // zIndex: 1200,
+          cursor: "pointer"
+        }}
+        onClick={() => {
+          const pagoSection = document.getElementById("pago");
+          if (pagoSection) {
+            pagoSection.scrollIntoView({ behavior: "smooth" });
+          }
         }}
       >
         {isMobile
@@ -460,6 +465,7 @@ const LandingPage: React.FC = () => {
               </Typography>
 
               <Button
+                onClick={() => navigate("/programa")}
                 endIcon={
                   <Box
                     sx={{
@@ -603,8 +609,8 @@ const LandingPage: React.FC = () => {
           </Grid>
         </Box>
       </Grid>
-      <Grid item sm={12} md={12} lg={12}>
-        <Box sx={{ backgroundColor: "#0a0a0a", py: 5 }}>
+      <Grid item sm={12} md={12} lg={12} id="pago">
+        <Box sx={{ backgroundColor: "#0a0a0a" }}>
           <Card
             sx={{
               backgroundColor: "#121212",
@@ -678,6 +684,7 @@ const LandingPage: React.FC = () => {
       </Grid>
       <Grid item sm={6} md={8} lg={8} sx={{ mb: 5 }}>
         <Box
+          
           sx={{
             display: "flex",
             alignItems: "center",
@@ -1134,9 +1141,9 @@ const LandingPage: React.FC = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item sm={12} md={12} lg={12}>
+      <Grid item sm={12} md={12} lg={12} marginBottom={3} marginTop={3}>
         <Box
-        id="contacto"
+          id="contacto"
           sx={{
             backgroundColor: "#111",
             p: 3,
@@ -1144,8 +1151,12 @@ const LandingPage: React.FC = () => {
             color: "white",
           }}
         >
-          <Typography variant="h2" gutterBottom>Contacto</Typography>
-          <Typography variant="body1" gutterBottom>Escribinos y respondemos tus dudas.</Typography>
+          <Typography variant="h2" gutterBottom>
+            Contacto
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Escribinos y respondemos tus dudas.
+          </Typography>
 
           <TextField
             label="Tu Email"

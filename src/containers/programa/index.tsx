@@ -17,7 +17,7 @@ const courseContent = [
     text: "DESARROLLO WEB / 8 clases",
     details: [
       "Introducción y primeros pasos en la programación",
-      "GIT",
+      "Introducción a Git y Github",
       "Visual Studio Code",
       "Fundamentos HTML - 3 clases",
       "Fundamentos CSS - 3 clases",

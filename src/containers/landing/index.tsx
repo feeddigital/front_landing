@@ -319,7 +319,7 @@ const LandingPage: React.FC = () => {
         severity="warning"
         icon={false}
         sx={{
-          backgroundColor: "rgba(252, 102, 2, 0.66)",
+          backgroundColor: "rgb(241, 255, 131)",
           color: "white",
           position: "fixed",
           top: isMobile ? "52px" : "64px",

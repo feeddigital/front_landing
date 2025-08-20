@@ -203,11 +203,13 @@ const LandingPage: React.FC = () => {
 
   const isInscripcionFormValid = (): boolean => {
     return (
+      planPago !== "" &&
       inscripcionNombre.trim() !== "" &&
       inscripcionApellido.trim() !== "" &&
       isValidEmail(inscripcionEmail) &&
       inscripcionEmail !== "" &&
-      inscripcionWhatsapp.includes("+") &&
+      // inscripcionWhatsapp.includes("+") &&
+      inscripcionWhatsapp !== "" &&
       isValidWhatsapp(inscripcionWhatsapp)
     );
   };
@@ -329,7 +331,7 @@ const LandingPage: React.FC = () => {
           left: 0,
           width: "100%",
           textAlign: "center",
-          cursor: "pointer"
+          cursor: "pointer",
         }}
         onClick={() => {
           const pagoSection = document.getElementById("pago");
@@ -686,7 +688,6 @@ const LandingPage: React.FC = () => {
       </Grid>
       <Grid item sm={6} md={8} lg={8} sx={{ mb: 5 }}>
         <Box
-          
           sx={{
             display: "flex",
             alignItems: "center",
@@ -722,93 +723,6 @@ const LandingPage: React.FC = () => {
 
         <Paper sx={{ p: 4, textAlign: "center", backgroundColor: "#0a0a0a" }}>
           <Box sx={{ mb: 4 }}>
-            {planPago === "transferencia1" && (
-              <Box sx={{ mb: 3, textAlign: "center" }}>
-                {/* Precio tachado */}
-                <Typography
-                  sx={{
-                    fontSize: "1.2rem",
-                    color: "#aaa",
-                    textDecoration: "line-through",
-                  }}
-                >
-                  $360.000
-                </Typography>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 1.5,
-                    mt: 1,
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: "2rem",
-                      fontWeight: "bold",
-                      color: "#fff",
-                    }}
-                  >
-                    $216.000
-                  </Typography>
-
-                  <Box
-                    sx={{
-                      backgroundColor: "#e53935",
-                      color: "#fff",
-                      fontWeight: "bold",
-                      borderRadius: "6px",
-                      px: 1.5,
-                      py: 0.5,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                    }}
-                  >
-                    <WhatshotIcon sx={{ fontSize: "1rem" }} />
-                    <Typography sx={{ fontSize: "0.9rem", fontWeight: "bold" }}>
-                      40% OFF
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-            )}
-            {planPago === "transferencia6" && (
-              <Box sx={{ mb: 3, textAlign: "center" }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 1.5,
-                    mt: 1,
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: "1.1rem",
-                      fontWeight: "bold",
-                      color: "#D1D5DB",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.5px",
-                    }}
-                  >
-                    Pago mensual
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: "2rem",
-                      fontWeight: "bold",
-                      color: "#fff",
-                    }}
-                  >
-                    $60.000
-                  </Typography>
-                </Box>
-              </Box>
-            )}
             <Box
               sx={{
                 display: "flex",
@@ -824,25 +738,146 @@ const LandingPage: React.FC = () => {
                   value: "transferencia1",
                   label: "Transferencia 1 pago",
                   desc: "Pago único con transferencia bancaria.",
-                  hasDiscount: true,
+                  precio: (
+                    <>
+                      <Typography
+                        sx={{
+                          fontSize: "1.2rem",
+                          color: "#aaa",
+                          textDecoration: "line-through",
+                        }}
+                      >
+                        $360.000
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: 1.5,
+                          mt: 1,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: "2rem",
+                            fontWeight: "bold",
+                            color: "#fff",
+                          }}
+                        >
+                          $216.000
+                        </Typography>
+                        <Box
+                          sx={{
+                            backgroundColor: "#e53935",
+                            color: "#fff",
+                            fontWeight: "bold",
+                            borderRadius: "6px",
+                            px: 0.5,
+                            py: 0.5,
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 0.5,
+                            width: 55,
+                          }}
+                        >
+                          <WhatshotIcon sx={{ fontSize: "1rem" }} />
+                          <Typography
+                            sx={{ fontSize: "0.6rem", fontWeight: "bold" }}
+                          >
+                            40% OFF
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </>
+                  ),
                 },
                 {
                   value: "transferencia6",
                   label: "Transferencia 6 pagos",
                   desc: "6 cuotas fijas sin interés por transferencia.",
-                  hasDiscount: false,
+                  precio: (
+                    <>
+                      <Typography
+                        sx={{
+                          fontSize: "1.2rem",
+                          color: "#aaa",
+                        }}
+                      >
+                        PAGO MENSUAL
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: 1.5,
+                          mt: 1,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: "2rem",
+                            fontWeight: "bold",
+                            color: "#fff",
+                          }}
+                        >
+                          $60.000
+                        </Typography>
+                      </Box>
+                    </>
+                  ),
                 },
                 {
                   value: "tarjeta",
                   label: "Tarjeta de crédito",
                   desc: "Pagá con tu tarjeta en cuotas.",
-                  hasDiscount: false,
+                  precio: (
+                    <>
+                      <Typography
+                        sx={{
+                          fontSize: "1.2rem",
+                          color: "#aaa",
+                        }}
+                      >
+                        CUOTAS CON INTERÉS
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: 1.5,
+                          mt: 1,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: "2rem",
+                            fontWeight: "bold",
+                            color: "#fff",
+                          }}
+                        >
+                          $360.000
+                        </Typography>
+                      </Box>
+                    </>
+                  ),
                 },
               ].map((plan) => (
                 <Box
                   key={plan.value}
-                  sx={{ position: "relative", display: "inline-block" }}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: 1,
+                  }}
                 >
+                  {/* Precio siempre visible */}
+                  {plan.precio}
+
+                  {/* Botón */}
                   <Button
                     variant={planPago === plan.value ? "contained" : "outlined"}
                     color={planPago === plan.value ? "primary" : "inherit"}
@@ -860,55 +895,13 @@ const LandingPage: React.FC = () => {
                         backgroundColor:
                           planPago === plan.value ? "primary.dark" : "#1f1f1f",
                       },
-                      position: "relative",
-                      overflow: "visible",
                     }}
                   >
                     {plan.label}
                   </Button>
-
-                  {plan.value === "transferencia1" && (
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        top: -15,
-                        right: -1,
-                        backgroundColor: "#e53935",
-                        color: "#fff",
-                        fontWeight: "bold",
-                        borderRadius: "6px",
-                        px: 1,
-                        py: 0.3,
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 0.3,
-                        fontSize: "0.75rem",
-                        boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-                      }}
-                    >
-                      <WhatshotIcon sx={{ fontSize: "1rem" }} />
-                      40% OFF
-                    </Box>
-                  )}
                 </Box>
               ))}
             </Box>
-
-            {/* Descripción del plan seleccionado */}
-            {planPago && (
-              <Box sx={{ mb: 4 }}>
-                <Typography sx={{ color: "#ccc", mb: 1 }}>
-                  {
-                    {
-                      transferencia1: "Pago único con transferencia bancaria.",
-                      transferencia6:
-                        "6 cuotas fijas sin interés por transferencia.",
-                      tarjeta: "Pagá con tu tarjeta en cuotas.",
-                    }[planPago]
-                  }
-                </Typography>
-              </Box>
-            )}
 
             <Box
               sx={{

@@ -320,7 +320,7 @@ const LandingPage: React.FC = () => {
         icon={false}
         sx={{
           backgroundColor: "rgb(241, 255, 131)",
-          color: "white",
+          color: "black",
           position: "fixed",
           top: isMobile ? "52px" : "64px",
           zIndex: (theme) => theme.zIndex.drawer + 1,

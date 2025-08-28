@@ -44,6 +44,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import { apiService } from "../../services/api-service";
 import Layout from "../layout";
+import { validation } from "../../utils/validation";
 
 const LandingPage: React.FC = () => {
   const theme = useTheme();
@@ -128,7 +129,7 @@ const LandingPage: React.FC = () => {
   };
 
   const handleConsultaDisponible = async () => {
-    if (!consultaEmail || !isValidEmail(consultaEmail)) {
+    if (!consultaEmail || !validation.email(consultaEmail)) {
       showAlert("error", "Por favor ingresá un email válido.");
       return;
     }
@@ -160,7 +161,7 @@ const LandingPage: React.FC = () => {
   };
 
   const handleConsulta = async () => {
-    if (!consultaEmail || !isValidEmail(consultaEmail)) {
+    if (!consultaEmail || !validation.email(consultaEmail)) {
       showAlert("error", "Por favor ingresá un email válido.");
       return;
     }
@@ -190,27 +191,16 @@ const LandingPage: React.FC = () => {
     }
   };
 
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const isValidWhatsapp = (whatsapp: string): boolean => {
-    if (!whatsapp) return true;
-    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,15}$/;
-    return phoneRegex.test(whatsapp.replace(/\s/g, ""));
-  };
-
   const isInscripcionFormValid = (): boolean => {
     return (
       planPago !== "" &&
       inscripcionNombre.trim() !== "" &&
       inscripcionApellido.trim() !== "" &&
-      isValidEmail(inscripcionEmail) &&
+      validation.email(inscripcionEmail) &&
       inscripcionEmail !== "" &&
       // inscripcionWhatsapp.includes("+") &&
       inscripcionWhatsapp !== "" &&
-      isValidWhatsapp(inscripcionWhatsapp)
+      validation.phone(inscripcionWhatsapp)
     );
   };
 
@@ -972,9 +962,9 @@ const LandingPage: React.FC = () => {
               onChange={(e) => setInscripcionEmail(e.target.value)}
               disabled={isLoading}
               required
-              error={inscripcionEmail !== "" && !isValidEmail(inscripcionEmail)}
+              error={inscripcionEmail !== "" && !validation.email(inscripcionEmail)}
               helperText={
-                inscripcionEmail !== "" && !isValidEmail(inscripcionEmail)
+                inscripcionEmail !== "" && !validation.email(inscripcionEmail)
                   ? "Email inválido"
                   : ""
               }
@@ -995,9 +985,9 @@ const LandingPage: React.FC = () => {
               value={inscripcionWhatsapp}
               onChange={(e) => setInscripcionWhatsapp(e.target.value)}
               disabled={isLoading}
-              error={!isValidWhatsapp(inscripcionWhatsapp)}
+              error={!validation.phone(inscripcionWhatsapp)}
               helperText={
-                !isValidWhatsapp(inscripcionWhatsapp)
+                !validation.phone(inscripcionWhatsapp)
                   ? "Formato de WhatsApp inválido"
                   : "Incluye código de país (ej: +54)"
               }
@@ -1043,9 +1033,9 @@ const LandingPage: React.FC = () => {
               value={consultaEmail}
               onChange={(e) => setConsultaEmail(e.target.value)}
               disabled={isLoading}
-              error={consultaEmail !== "" && !isValidEmail(consultaEmail)}
+              error={consultaEmail !== "" && !validation.email(consultaEmail)}
               helperText={
-                consultaEmail !== "" && !isValidEmail(consultaEmail)
+                consultaEmail !== "" && !validation.email(consultaEmail)
                   ? "Email inválido"
                   : ""
               }
@@ -1064,8 +1054,8 @@ const LandingPage: React.FC = () => {
                 onClick={handleConsultaDisponible}
                 disabled={
                   isLoading ||
-                  !isValidEmail(consultaEmail) ||
-                  !isValidWhatsapp(inscripcionWhatsapp)
+                  !validation.email(consultaEmail) ||
+                  !validation.phone(inscripcionWhatsapp)
                 }
                 startIcon={
                   isLoading ? <CircularProgress size={20} /> : <Email />
@@ -1184,7 +1174,7 @@ const LandingPage: React.FC = () => {
               onClick={handleConsulta}
               disabled={
                 isLoading ||
-                !isValidEmail(consultaEmail) ||
+                !validation.email(consultaEmail) ||
                 consultaTexto.trim() === ""
               }
               startIcon={isLoading ? <CircularProgress size={20} /> : <Email />}

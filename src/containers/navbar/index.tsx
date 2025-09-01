@@ -1,7 +1,18 @@
 import { AppBar, Toolbar, Button, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const location = useLocation();
+
+  const handleContactoClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    // Si estamos en la página principal, prevenimos la navegación y hacemos un scroll suave.
+    if (location.pathname === "/") {
+      event.preventDefault();
+      document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" });
+    }
+    // Si estamos en otra página, dejamos que el comportamiento por defecto del enlace <a> nos lleve a /#contacto.
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -34,7 +45,12 @@ const Navbar = () => {
           <Button component={Link} to="/" sx={{ color: "white" }}>
             Quienes somos
           </Button>
-          <Button component="a" href="#contacto" sx={{ color: "white" }}>
+          <Button
+            component="a"
+            href="/#contacto"
+            onClick={handleContactoClick}
+            sx={{ color: "white" }}
+          >
             Contacto
           </Button>
         </Box>

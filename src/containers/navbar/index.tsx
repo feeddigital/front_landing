@@ -5,12 +5,10 @@ const Navbar = () => {
   const location = useLocation();
 
   const handleContactoClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    // Si estamos en la página principal, prevenimos la navegación y hacemos un scroll suave.
     if (location.pathname === "/") {
       event.preventDefault();
       document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" });
     }
-    // Si estamos en otra página, dejamos que el comportamiento por defecto del enlace <a> nos lleve a /#contacto.
   };
 
   return (

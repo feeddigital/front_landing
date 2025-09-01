@@ -206,14 +206,14 @@ const LandingPage: React.FC = () => {
 
   const scheduleItems = [
     { text: "Lunes y Miércoles", icon: <CalendarToday />, color: "secondary" },
-    { text: "20 a 22hs.", icon: <Schedule />, color: "success" },
+    { text: "19 a 21hs.", icon: <Schedule />, color: "success" },
     {
       text: "6 meses",
       icon: <CalendarToday />,
       color: "primary",
     },
     {
-      text: "Comienza 01/09",
+      text: "Comienza 22/09",
       icon: <CalendarToday />,
       color: "secondary",
     },
@@ -331,8 +331,8 @@ const LandingPage: React.FC = () => {
         }}
       >
         {isMobile
-          ? `Hasta el 30/08 💥 40% OFF en Curso FullStack Developer`
-          : `🎉 Hasta el 30/08 💥 40% de descuento en el curso 👉 Desarrollo Web
+          ? `Hasta el 15/09 💥 40% OFF en Curso FullStack Developer`
+          : `🎉 Hasta el 15/09 💥 40% de descuento en el curso 👉 Desarrollo Web
           FullStack`}
       </Alert>
 

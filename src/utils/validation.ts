@@ -5,7 +5,7 @@ export const validation = {
   },
 
   phone: (phone: string): boolean => {
-    if (!phone) return true; // Opcional
+    if (!phone) return true; 
     const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,15}$/;
     return phoneRegex.test(phone.replace(/\s/g, ""));
   },

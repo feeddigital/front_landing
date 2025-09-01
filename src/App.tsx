@@ -7,6 +7,7 @@ import Exito from "./containers/exito";
 import RespuestaContacto from "./containers/respuesta-contacto";
 import PoliticaPrivacidad from "./containers/policy";
 import Programa from "./containers/programa";
+import FormClaseFree from "./containers/form-clase-free";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           <Route path="/exito" element={<Exito />} />
           <Route path="/consulta" element={<RespuestaContacto />} />
           <Route path="/privacidad" element={<PoliticaPrivacidad />} />
+          <Route path="/form-clase-free" element={<FormClaseFree/>} />
         </Routes>
       </Router>
     </ThemeProvider>

@@ -332,8 +332,8 @@ const LandingPage: React.FC = () => {
         }}
       >
         {isMobile
-          ? `Hasta el 15/09 💥 40% OFF en Curso FullStack Developer`
-          : `🎉 Hasta el 15/09 💥 40% de descuento en el curso 👉 Desarrollo Web
+          ? `Hasta el 08/09 💥 40% OFF en Curso FullStack Developer`
+          : `🎉 Hasta el 08/09 💥 40% de descuento en el curso 👉 Desarrollo Web
           FullStack`}
       </Alert>
 

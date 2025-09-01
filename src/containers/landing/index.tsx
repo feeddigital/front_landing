@@ -1204,7 +1204,7 @@ const LandingPage: React.FC = () => {
         onClick={() => navigate("/form-clase-free")}
       >
         <WhatshotIcon sx={{ mr: 1 }} />
-        PRIMER CLASE GRATIS
+        VER PRIMER CLASE GRATIS
       </Fab>
     </Layout>
   );

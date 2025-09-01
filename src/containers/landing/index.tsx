@@ -23,6 +23,7 @@ import {
   useMediaQuery,
   List,
   Alert,
+  Fab,
 } from "@mui/material";
 import {
   Code,
@@ -1190,6 +1191,21 @@ const LandingPage: React.FC = () => {
           </Box>
         </Box>
       </Grid>
+      <Fab
+        variant="extended"
+        color="error"
+        aria-label="primera clase gratis"
+        sx={{
+          position: "fixed",
+          bottom: { xs: 24, md: 24 },
+          right: { xs: 24, md: 24 },
+          zIndex: (theme) => theme.zIndex.drawer + 2,
+        }}
+        onClick={() => navigate("/form-clase-free")}
+      >
+        <WhatshotIcon sx={{ mr: 1 }} />
+        PRIMER CLASE GRATIS
+      </Fab>
     </Layout>
   );
 };

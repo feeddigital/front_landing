@@ -1,0 +1,1 @@
+https://digitaldevcursos.com/* https://www.digitaldevcursos.com/:splat 301!

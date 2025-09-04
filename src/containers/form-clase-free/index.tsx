@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { apiService } from "../../services/api-service";
 import { validation } from "../../utils/validation";
+import { useNavigate } from "react-router-dom";
 import Layout from "../layout";
 
 import {
@@ -27,6 +28,8 @@ const FormClaseFree: React.FC = () => {
     type: "success" | "error";
     message: string;
   } | null>(null);
+
+  const navigate = useNavigate();
 
   const isInscripcionFormValid = (): boolean => {
     return (
@@ -72,6 +75,8 @@ const FormClaseFree: React.FC = () => {
       setInscripcionNombre("");
       setInscripcionApellido("");
       setInscripcionWhatsapp("");
+
+      navigate("/exito-clase0");
     } catch (error: any) {
       console.error("Error:", error);
       showAlert(

@@ -214,7 +214,7 @@ const LandingPage: React.FC = () => {
       color: "primary",
     },
     {
-      text: "Comienza 22/09",
+      text: "Comienza 20/10",
       icon: <CalendarToday />,
       color: "secondary",
     },
@@ -332,8 +332,8 @@ const LandingPage: React.FC = () => {
         }}
       >
         {isMobile
-          ? `Hasta el 08/09 💥 40% OFF en Curso FullStack Developer`
-          : `🎉 Hasta el 08/09 💥 40% de descuento en el curso 👉 Desarrollo Web
+          ? `Hasta el 08/10 💥 40% OFF en Curso FullStack Developer`
+          : `🎉 Hasta el 08/10 💥 40% de descuento en el curso 👉 Desarrollo Web
           FullStack`}
       </Alert>
 
